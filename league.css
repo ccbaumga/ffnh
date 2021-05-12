@@ -1,0 +1,25 @@
+#standings {
+    border: 2px solid black;
+    margin: 10px 10px 0px;
+}
+
+#standings h1 {
+    text-align:center;
+}
+
+.nav3 li {
+    flex-basis: 100%;
+		background-color: #030350;
+		margin: 10px 10px 0px;
+}
+
+.nav4 li {
+    flex-basis: 100%;
+		background-color: red;
+		margin: 10px 10px 0px;
+}
+
+#standings li:hover{
+    background-color:#eeeeee;
+}
+

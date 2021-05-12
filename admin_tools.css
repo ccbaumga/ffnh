@@ -1,0 +1,5 @@
+.adminbutton li {
+    flex-basis: 100%;
+		background-color: red;
+		margin: 10px 10px 0px;
+}

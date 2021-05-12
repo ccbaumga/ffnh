@@ -1,0 +1,51 @@
+#week-selector {
+	display: flex;
+	justify-content: center;
+}
+
+#week-selector button {
+	background-color: white;
+	border-color: transparent;
+	font-size: 150%;
+}
+
+#splitscreen {
+	display: flex;
+}
+
+.half {
+	flex: 0 1 48%;
+	border: 2px solid black;
+}
+
+#center {
+	flex: 0 1 4%;
+}
+
+.teamname {
+	background-color: #5577bb;
+}
+
+.teamname h1 {
+	margin: 0;
+}
+
+.teamname img {
+	float: left;
+}
+
+.record {
+	flex: 0 0 20%;
+}
+
+.fteamname {
+	font-size: 1em;
+}
+
+.username {
+	display:none;
+}
+
+ul.fteaminstance li {
+	padding: 0;
+}

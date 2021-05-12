@@ -1,0 +1,67 @@
+.starting .won {
+	background-color: #55ff55;
+}
+
+.starting .inprogress {
+	background-color: #ffff55;
+}
+
+.starting .lost {
+	background-color: #ff5555;
+}
+
+.starting .yettoplay {
+	background-color: white;
+}
+
+.bench .won {
+	background-color: #ccffcc;
+}
+
+.bench .inprogress {
+	background-color: #ffffcc;
+}
+
+.bench .lost {
+	background-color: #ffcccc;
+}
+
+.bench .yettoplay {
+	background-color: #eeeeee;
+}
+
+.starting {
+	background-color: #eeeeee;
+}
+
+.bench {
+	background-color: #cccccc;
+}
+
+.fteam {
+  background-color: white;
+}
+
+#standings {
+	background-color: #ccccff;
+}
+
+#startbutton {
+  background-color:green;
+}
+
+#benchbutton {
+  background-color:yellow;
+}
+
+#dropbutton {
+  background-color:red;
+}
+
+#tradebutton {
+  background-color:purple;
+}
+
+#addbutton {
+  background-color:green;
+}

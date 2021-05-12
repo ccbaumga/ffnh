@@ -1,0 +1,40 @@
+ul.fteaminstance {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ul.fteaminstance li {
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em;
+	margin: 0.5em;
+	border: 2px solid black;
+}
+
+ul.fteaminstance p {
+	margin:0;
+}
+
+.teamimage {
+	flex: 0 1 20%;
+}
+
+.fteamname {
+	flex: 0 1 40%;
+	font-weight: bold;
+	font-size: 2em;
+	margin: 0;
+}
+
+.username {
+	flex: 2 1 50%;
+	font-style:italic;
+}
+
+.record {
+	flex: 0 0 10%;
+	font-weight:bold;
+}

@@ -1,0 +1,42 @@
+.ateam {
+	background-color: #FFFFFF;
+}
+
+.ateam h2 {
+	margin: 0;
+}
+
+.ateam img {
+	float: left;
+}
+
+.myteamslist ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.myteamslist li {
+	padding: 0.5em;
+	margin: 0.5em;
+	border: 2px solid black;
+}
+
+.myteamslist {
+	background-color: #5577bb;
+}
+
+.nav2 li {
+	flex-basis: 100%;
+}
+
+.button li {
+    flex-basis: 100%;
+		background-color: #030350;
+		margin: 10px 10px 0px;
+}
+
+.editprofile {
+	margin: 0px 0px 10px;
+}
