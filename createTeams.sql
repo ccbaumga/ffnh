@@ -16,7 +16,7 @@ INSERT INTO nflteams (abbr, location, mascot) VALUES ('DEN', 'Denver', 'Broncos'
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('LAC', 'Los Angeles', 'Chargers');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('PHI', 'Philadelphia', 'Eagles');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('NYG', 'New York', 'Giants');
-INSERT INTO nflteams (abbr, location, mascot) VALUES ('WAS', 'Washington', 'Football Team');
+INSERT INTO nflteams (abbr, location, mascot) VALUES ('WAS', 'Washington', 'Commanders');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('DAL', 'Dallas', 'Cowboys');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('MIN', 'Minnesota', 'Vikings');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('CHI', 'Chicago', 'Bears');

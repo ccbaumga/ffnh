@@ -16,7 +16,9 @@
 	include("header.html"); 
 	include("nav.html");
 	include("gameinstance.php");
-	$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	//$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	include ("db.php");
+	$pdo = $db;
 	
 	/*i'm setting the cookies stuff*/
 	$username = $_SESSION['username'];
@@ -157,7 +159,9 @@
 					?><li id="dropbutton"><a href="drop_confirm.php">Drop</a></li><?php
 				//}
 			} else if ($instanceowner == "") {
-				?><li id="addbutton"><a href="add_confirm.php">Add</a></li><?php
+				?><li id="addbutton"><a href="add_confirm.php?leagueid=<?php echo $leagueid;
+				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
+				$game->myinstancenumber?>">Add</a></li><?php
 			} else {
 				?><li id="tradebutton"><a href="trade_confirm.php">Trade</a></li><?php
 			}?>

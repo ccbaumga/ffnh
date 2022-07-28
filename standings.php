@@ -28,7 +28,9 @@
 	$week = $currentweek;
 	
 	/*get all fantasy teams*/
-	$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	//$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	include("db.php");
+	$pdo = $db;
 	$statement = $pdo->prepare('select teamid, teamname, wins, losses, ties, owner
 	from fantasyteams
 	where league = ?

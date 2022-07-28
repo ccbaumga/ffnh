@@ -126,11 +126,16 @@ function gameCreate($game, $sqlarray, $pdo, $week) {
 		$currgame = $currstatement->fetch();
 		//echo "home: ";
 		//echo $currgame['hometeam'];
-		$game->ishome = $currgame['hometeam'] == $game->myabbr;
-		$game->isaway = $currgame['awayteam'] == $game->myabbr;
-		$game->isonbye = !$game->ishome && !$game->isaway;
+		
+		if ($currgame == false){
+		    $game->isonbye = true;
+		} else {
+			$game->isonbye = false;
+		}
 		//echo $ishome;
 		if (!$game->isonbye) {
+			$game->ishome = $currgame['hometeam'] == $game->myabbr;
+		    $game->isaway = $currgame['awayteam'] == $game->myabbr;
 			if ($game->ishome){
 				$game->oppabbr = $currgame['awayteam'];
 				$game->myscore = $currgame['homescore'];
@@ -170,7 +175,7 @@ function htmlOfSingleGame($game, $where, $leagueid) {
 					<img src="ffnh.png" alt="Team Image" style="width:42px;height:42px;">
 				</div>
 				<div class="nflteaminfo">
-					<p class="nflteamname"> <?php echo $game->mylocation ?> </p>
+					<p class="nflteamname"> <?php echo $game->myinstancenumber ?> <?php echo $game->mylocation ?> </p>
 					<p class="nflrecord"><?php echo $game->stringMyRecord() ?></p>
 				</div>
 				<div class="nflgameinfo">

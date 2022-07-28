@@ -36,7 +36,7 @@ CREATE TABLE nflgames (
 	
 CREATE TABLE profiles (
 	username VARCHAR(20), 
-	password VARCHAR(60), 
+	password VARCHAR(100), 
 	PRIMARY KEY (username)
 );
 

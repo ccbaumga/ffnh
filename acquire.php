@@ -16,7 +16,9 @@
 	include("header.html"); 
 	include("nav.html");
 	include("gameinstance.php");
-	$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	//$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	include("db.php");
+	$pdo = $db;
 	
 	/*i'm setting the cookies stuff*/
 	$username = $_SESSION['username'];

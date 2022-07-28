@@ -4,8 +4,10 @@
 
 function db_connect() {
 	try {
-		$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", 
-		"baumgc12", "mysql884812", array(PDO::ATTR_ERRMODE => 
+		//$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", 
+		//"baumgc12", "mysql884812", array(PDO::ATTR_ERRMODE => 
+		$pdo = new PDO("mysql:host=localhost;dbname=ffnh", 
+		"root", "root", array(PDO::ATTR_ERRMODE => 
 		PDO::ERRMODE_EXCEPTION));
 	} catch (PDOException $e) {
 		echo "Cannot connect to the database";
@@ -27,7 +29,7 @@ function register($username, $password) {
 	try{
 		$statement = $db->prepare("INSERT INTO profiles 
 		(username, password) values (?, ?)");
-		$statement->execute([$username, crypt($password)]);
+		$statement->execute([$username, password_hash($password, PASSWORD_DEFAULT)]);
 		$registered = TRUE;
 	} catch (PDOException $e) {
 		//echo "ERROR";
@@ -49,7 +51,7 @@ function is_password_correct($username, $password) {
 		/*if (hash_equals($hashed_password, crypt($password, $correct_password))) {
 			$password_correct = TRUE;
 		}*/
-		$password_correct = $correct_password === crypt($password, $correct_password);
+		$password_correct = password_verify($password, $correct_password);
 		}
 	}
 	return $password_correct;

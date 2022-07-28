@@ -36,11 +36,16 @@
 	<?php include("header.html"); //echo $_SESSION["username"];?>
 	<h1>Fantasy Football No Huddle</h1>
 	<p>Tired of losing to nerds in fantasy football but don't want to spend 
-	hours researching? Fantasy Football No Huddle is here! Instead of players,
-	draft entire NFL teams to join your fantasy squad, and score points if 
-	they win! No more worrying about injuries. No more deciphering coachspeak
+	hours researching? Fantasy Football No Huddle is here!</p>
+	<p>Instead of players, draft entire NFL teams to join your fantasy squad, and score points if 
+	they win! </p>
+	<p>No more worrying about injuries. No more deciphering coachspeak
 	to determine playing time. No more garbage time production. Only wins and
-	losses! Log in or sign up below:</p>
+	losses!</p>
+	<p>Draft a team full of NFL teams. Get points if they win their actual NFL game. Some wins are worth more than others.</p>
+	<p>Manage your team of teams throughout the season. Add unowned teams, make trades with other players, decide which teams to put in your starting lineup each week.</p>
+	<p>Each week, compete head to head against another player. Whoever's NFL teams get more points from winning their game will be the fantasy winner! </p>
+	<p>Log in or sign up below:</p>
 	<section class="login">
 		<h2>Log In</h2>
 	<?php if($loginFailed) { ?>

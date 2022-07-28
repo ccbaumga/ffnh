@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--this page is for locking in the teams??-->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,5 +18,5 @@
 	include("nav.html");
 	if (!isset($_SESSION["leagueadmin"])) {
 		redirect("team.php");
-	}
-	
+	}?>
+</body>

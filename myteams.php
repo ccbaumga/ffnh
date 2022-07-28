@@ -16,7 +16,9 @@
 	<?php include("header.html");
 	$username = $_SESSION["username"];
 	
-	$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	//$pdo = new PDO("mysql:host=localhost;dbname=baumgc12", "baumgc12", "mysql884812");
+	include("db.php");
+	$pdo = $db;
 	
 	/*get teamslist/leagueslist*/
 	$statement = $pdo->prepare('SELECT l.leagueid, l.leaguename, t.teamid, t.teamname 
