@@ -80,7 +80,7 @@
 	}
 	
 	/*set weeks with game*/
-	$maxweeks = 17;
+	$maxweeks = 18;
 	$weekswithgame = [];
 	for ($i = 1; $i <= $maxweeks; $i++) {
 		$weekswithgame[$i] = false;
@@ -152,18 +152,26 @@
 			<?php if ($instanceowner == $teamid) {
 				//if ($game->status == "upcoming") {
 					if ($status == "starting") {
-						?><li id="benchbutton"><a href="bench_confirm.php">Bench</a></li><?php
+						?><li id="benchbutton"><a href="bench_confirm.php?leagueid=<?php echo $leagueid;
+				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
+				$game->myinstancenumber?>">Bench</a></li><?php
 					} else if ($status == "bench") {
-						?><li id="startbutton"><a href="start_confirm.php">Start</a></li><?php
+						?><li id="startbutton"><a href="start_confirm.php?leagueid=<?php echo $leagueid;
+				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
+				$game->myinstancenumber?>">Start</a></li><?php
 					}
-					?><li id="dropbutton"><a href="drop_confirm.php">Drop</a></li><?php
+					?><li id="dropbutton"><a href="drop_confirm.php?leagueid=<?php echo $leagueid;
+				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
+				$game->myinstancenumber?>">Drop</a></li><?php
 				//}
 			} else if ($instanceowner == "") {
 				?><li id="addbutton"><a href="add_confirm.php?leagueid=<?php echo $leagueid;
 				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
 				$game->myinstancenumber?>">Add</a></li><?php
 			} else {
-				?><li id="tradebutton"><a href="trade_confirm.php">Trade</a></li><?php
+				?><li id="tradebutton"><a href="trade_confirm.php?leagueid=<?php echo $leagueid;
+				?>&nflteam=<?php echo $game->myabbr?>&instance=<?php echo 
+				$game->myinstancenumber?>">Trade</a></li><?php
 			}?>
 			</ul>
 		</section>
@@ -174,13 +182,14 @@
 					<th>Opponent</th>
 					<th>Result</th>
 				</tr>
-				<?php for ($i = 1; $i < $maxweeks; $i++) {
+				<?php for ($i = 1; $i <= $maxweeks; $i++) {
 					?><tr>
 					<?php if ($weekswithgame[$i] != false) { ?>
 						<td><?php echo $i;?></td>
 						<td><?php echo $games[$i]->oppInfo();?></td>
 						<td><?php echo $games[$i]->timeAndScore();?></td>
 					<?php } else { ?>
+						<td><?php echo $i;?></td>
 						<td>Bye</td>
 					<?php } ?>
 					</tr><?php

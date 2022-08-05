@@ -49,8 +49,10 @@
 		fteamCreate($fteams[$i], $fantasyteams[$i]);
 	} 
 	
-	/*see draft time*/
+	/*see draft time, old*/
+	$draftcomplete = true;
 	if($currentweek == 0) {
+		$draftcomplete = false;
 		$statement = $pdo->prepare('SELECT drafttime
 		from leagues
 		where leagueid = ?');
@@ -67,13 +69,13 @@
 				htmlSingleTeam($fteams[$i]);
 			} ?>
 		</ul>
-		<?php if ($currentweek == 0) {
+		<?php if ($draftcomplete == false) {
 		?><span>Draft is set for: <?php echo $drafttime;?></span><?php
 		}?>
 	</section>
 	<nav>
 		<ul class="nav3">
-			<li><a href="league_settings.html">League Settings</a></li>
+			<li><a href="league_settings.php">League Settings</a></li>
 		</ul>
 	</nav>
 	<?php if (isset($_SESSION['leagueadmin'])) { ?>

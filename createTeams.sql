@@ -30,3 +30,5 @@ INSERT INTO nflteams (abbr, location, mascot) VALUES ('SEA', 'Seattle', 'Seahawk
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('LA', 'Los Angeles', 'Rams');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('SF', 'San Francisco', '49ers');
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('ARI', 'Arizona', 'Cardinals');
+
+INSERT INTO globals (currentweek, urlpath) VALUES (1, 'localhost/ffnh/');

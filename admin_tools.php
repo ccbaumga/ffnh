@@ -22,19 +22,20 @@
 	if (!isset($_SESSION["leagueadmin"])) {
 		redirect("team.php");
 	}
-	$statement = $pdo->prepare('SELECT statusweek
+	$statement = $pdo->prepare('SELECT teamslocked, drafttime
 		from leagues
 		where leagueid = ?');
 		$statement->execute([$_SESSION['leagueid']]);
 		$row = $statement->fetch();
-		$statusweek = $row[0];
+		$teamslocked = $row['teamslocked'];
+		$drafttime = $row['drafttime'];
 	?>
 	<nav>
 		<ul class="adminbutton">
 			<li><a href="edit_settings.php">Edit League Settings</a></li>
 		</ul>
 	</nav>
-	<?php if ($statusweek == -1) { ?>
+	<?php if ($teamslocked == 0 && ($drafttime > date("Y-m-d H:i:s") || is_null($drafttime))) { ?>
 	<nav>
 		<ul class="adminbutton">
 			<li><a href="add_team.php">Add a Team by Username</a></li>
@@ -47,11 +48,11 @@
 	</nav>
 	<nav>
 		<ul class="adminbutton">
-			<li><a href="finalize_league.php">Finalize League</a></li>
+			<li><a href="lock_teams.php">Lock Teams</a></li>
 		</ul>
 	</nav>
 	<?php } ?>
-	<?php if ($statusweek == 0) { ?>
+	<?php if ($teamslocked == 1 && $drafttime > date("Y-m-d H:i:s")) { ?>
 	<nav>
 		<ul class="adminbutton">
 			<li><a href="set_draft_time.php">Set Draft Time</a></li>
@@ -59,7 +60,7 @@
 	</nav>
 	<nav>
 		<ul class="adminbutton">
-			<li><a href="unfinalize_league.php">Unfinalize League</a></li>
+			<li><a href="unfinalize_league.php">Unlock Teams</a></li>
 		</ul>
 	</nav>
 	<?php } ?>

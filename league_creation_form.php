@@ -21,11 +21,11 @@
 		$leaguename = $_POST["leaguename"];
 		$private = isset($_POST["private"]);
 		$teamname = $_POST["teamname"];
-		$numinstances = $_POST["numinstances"];
+		//$numinstances = $_POST["numinstances"];
 		$teamid = 0;
 		$leagueid = 0;
 		$creationFailed = create_league($leaguename, $private, 
-		$teamname, $numinstances);
+		$teamname);
 		
 		if (!$creationFailed) {
 			echo "creation worked";
@@ -37,7 +37,7 @@
 		$leaguename = "";
 		$private = false;
 		$teamname = "";
-		$numinstances = "";
+		//$numinstances = "";
 	}?>
 	<h1>Create a New League</h1>
 	<?php if ($creationFailed) {
@@ -53,10 +53,10 @@
 				<label for="numteams">Number of Teams:</label>
 				<input type="text" name="numteams" id="numteams" value="<?php echo $numteams ?>">
 			</div>-->
-			<div>
+			<!--<div>
 				<label for="numinstances">Number of Fantasy Instances per NFL Team (optional):</label>
 				<input type="text" name="numinstances" id="numinstances" value="<?php echo $numinstances ?>">
-			</div>
+			</div>-->
 			<div>
 				 <label for="private">Private League:</label>
 				 <input type="checkbox" name="private" id="private" <?php if ($private) echo "checked" ?>>
