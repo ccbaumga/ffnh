@@ -62,6 +62,11 @@
 			<li><a href="league_search.php">Join a League</a></li>
 		</ul>
 	</nav>
+	<nav>
+		<ul class="button">
+			<li><a href="logout.php">Log Out</a></li>
+		</ul>
+	</nav>
 </body>
 </html>
 

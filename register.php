@@ -4,7 +4,7 @@ include("db.php");
 
 $registerFailed = FALSE;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$username = $_POST["username"];
+	$username = trim($_POST["username"]);
 	$password = $_POST["password"];
 	if (register($username, $password)) {
 		$_SESSION["username"] = $username;

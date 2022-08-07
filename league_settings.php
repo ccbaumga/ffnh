@@ -14,16 +14,20 @@
 	<?php include("session_handling.php");
 	ensure_logged_in();
 	include("header.html"); 
-	include("nav.html");
-	
-	/*i'm setting the cookies stuff*/
-	$username = $_SESSION['username'];
-	$leagueid = $_SESSION['leagueid'];
-	$leaguename = $_SESSION['leaguename'];
-	$teamid = $_SESSION['teamid'];
-	$teamname = $_SESSION['teamname'];
 	include("db.php");
 	$pdo = $db;
+	if (!isset($_GET['search'])){
+		include("nav.html");
+		/*i'm setting the cookies stuff*/
+		$username = $_SESSION['username'];
+		$leagueid = $_SESSION['leagueid'];
+		$leaguename = $_SESSION['leaguename'];
+		$teamid = $_SESSION['teamid'];
+		$teamname = $_SESSION['teamname'];
+	} else {
+		$leagueid = $_GET['search'];
+	}
+
 	$statement = $pdo->prepare('select currentweek from globals');
 	$statement->execute([]);
 	$row = $statement->fetch();
@@ -46,10 +50,10 @@
 	} else {
 		$maxinstances = "Not Divisible";
 	}
-	$statement = $pdo->prepare('select admin, teamslocked, privacy, rosterlimit, maxstart, 
+	$statement = $pdo->prepare('select leaguename, admin, teamslocked, privacy, rosterlimit, maxstart, 
 	drafttime, regularweeks, playoffweeks, playoffteams, standingstiebreaker, weeklytiebreaker, tiesetting from leagues
 	where leagueid = ?');
-	$statement->execute([$_SESSION['leagueid']]);
+	$statement->execute([$leagueid]);
 	$row = $statement->fetch();
 	?>
 	<h2>League Settings</h2>
@@ -59,11 +63,11 @@
 	  </tr>
 	  <tr>
 		<td>League Name:</td>
-		<td><?php echo $_SESSION['leaguename'];?></td>
+		<td><?php echo $row['leaguename'];?></td>
 	  </tr>
 	  <tr>
 		<td>League ID:</td>
-		<td><?php echo $_SESSION['leagueid'];?></td>
+		<td><?php echo $leagueid;?></td>
 	  </tr>
 	  <tr>
 		<td>League Commissioner:</td>
@@ -159,3 +163,13 @@
 		?></td>
 	  </tr>
 	</table>
+	<nav>
+		<ul class="nav3">
+			<li><a href="standings.php<?php
+			if (isset($_GET['search'])){
+				echo "?search=";
+				echo $_GET['search'];
+			}
+			?>">Back to Standings</a></li>
+		</ul>
+	</nav>

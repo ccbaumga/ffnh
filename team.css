@@ -1,0 +1,39 @@
+.teamname {
+	background-color: #5577bb;
+}
+
+.teamname h1 {
+	margin: 0;
+}
+
+.teamname img {
+	float: left;
+}
+
+#week-selector {
+	display: flex;
+	justify-content: center;
+}
+
+#week-selector select {
+	font-size: 150%;
+	background-color: white;
+	border-color: transparent;
+}
+
+#week-selector button {
+	background-color: white;
+	border-color: transparent;
+	font-size: 150%;
+}
+
+#week-selector p {
+	font-size: 150%;
+	margin: 0;
+}
+
+#week-selector select option{
+    text-align: center;
+}
+
+

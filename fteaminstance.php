@@ -28,7 +28,14 @@ function fteamCreate($fteam, $sqlarray){
 function htmlSingleTeam($fteam) { ?>
 	<li class="fteam">
 		<?php //if ($fteam->teamimage){ ?>
-		<a href="team.php?otherteamid=<?php echo $fteam->teamid;?>"></a>
+		<a href="<?php 
+		if (!isset($_GET['search'])){
+			echo "team.php?otherteamid=";
+			echo $fteam->teamid;
+		} else {
+			echo "standings.php?search=";
+			echo $_GET['search'];
+		} ?>"> </a>
 		<div class="teamimage">
 			<img src="ffnh.png" alt="Team Image" style="width:42px;height:42px;">
 		</div>
