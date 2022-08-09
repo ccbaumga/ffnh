@@ -26,8 +26,8 @@ function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 		return "Username does not exist";
 	}
 	
-	/*check that league exists*/
-	$statement = $pdo->prepare('select leagueid
+	/*check that league exists, and check if teams locked*/
+	$statement = $pdo->prepare('select leagueid, teamslocked
 	from leagues
 	where leagueid = ?');
 	$statement->execute([$leagueid]);
@@ -37,6 +37,9 @@ function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 	}
 	if ($numrows != 1) {
 		return "League does not exist";
+	}
+	if ($extrastatements['teamslocked'] <> 0){
+		return "Teams are already locked for this league";
 	}
 	
 	/*check for duplicate profile in league*/

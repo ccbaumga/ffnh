@@ -42,12 +42,13 @@
 		?>
 		<table>
 			<tr>
-				<th>League Name</th>
 				<th>League ID</th>
+				<th>League Name</th>
 				<th>Admin</th>
 			</tr>
 			<?php while ($row = $statement->fetch()){
 				?><tr>
+				<td><?php echo $row['leagueid'];?></td>
 				<td><a href="standings.php?search=<?php echo $row['leagueid'];?>"><?php echo $row['leaguename'];?></td>
 				<td><?php echo $row['admin'];?></td>
 				</tr>

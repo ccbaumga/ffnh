@@ -52,7 +52,7 @@
 		</ul>
 	</nav>
 	<?php } ?>
-	<?php if ($teamslocked == 1 && $drafttime > date("Y-m-d H:i:s")) { ?>
+	<?php if ($teamslocked == 1 && ($drafttime > date("Y-m-d H:i:s") || is_null($drafttime))) { ?>
 	<nav>
 		<ul class="adminbutton">
 			<li><a href="set_draft_time.php">Set Draft Time</a></li>
