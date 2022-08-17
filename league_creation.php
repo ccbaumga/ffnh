@@ -140,24 +140,6 @@ function create_league($leaguename, $private, $teamname) {
 		$error .= "Please enter a league name. " . "<br>";
 	}
 	
-	/*$numteams = intval($numteams);
-	if ($numteams == 0 || !is_int($numteams)) {
-		$error .= "Number of teams must be a positive integer. " . "<br>";
-	} else if ($numteams % 2 != 0) {
-		$error .= "Number of teams must be even. " . "<br>";
-	}
-	
-	if (!$numinstances || $numinstances === "0") {
-		$numinstances = 0;
-	} else {
-		$numinstances = intval($numinstances);
-		if ($numinstances == 0 || !is_int($numinstances)) {
-			$error .= "Number of instances must be an integer. " . "<br>";
-		} else if ($numinstances < 0) {
-		$error .= "Number of instances must be non-negative. " . "<br>";
-		}
-	}*/
-	
 	if ($private) {
 		$privatetext = 'private';
 	} else {

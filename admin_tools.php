@@ -60,7 +60,7 @@
 	</nav>
 	<nav>
 		<ul class="adminbutton">
-			<li><a href="unfinalize_league.php">Unlock Teams</a></li>
+			<li><a href="unlock_teams.php">Unlock Teams</a></li>
 		</ul>
 	</nav>
 	<?php } ?>

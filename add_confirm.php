@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Fantasy Football No Huddle</title>
 	<link rel="stylesheet" href="header.css">
-	<link rel="stylesheet" href="league_creation_settings.css">
+	<link rel="stylesheet" href="league.css">
 	<link rel="stylesheet" href="colors.css">
 </head>
 <body>
@@ -78,9 +78,8 @@
 			<input type="submit" value="Add/Drop" >
 		</form>
 	</section>
-	<h1>Nevermind, I don't want to add <?php echo $_GET["instance"];?> <?php echo $_GET["nflteam"];?>. </h1>
-	<section class="form">
-		<form id="add" action="team.php" method="get">
-			<input type="submit" value="Back to my Team" >
-		</form>
-	</section>
+	<nav>
+		<ul class="nav3">
+			<li><a href="acquire.php">Cancel Add</a></li>
+		</ul>
+	</nav>

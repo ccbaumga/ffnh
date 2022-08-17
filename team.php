@@ -157,6 +157,16 @@
 	<?php if ($draftcomplete == false) {
 		?><span>Draft is set for: <?php echo $drafttime;?></span><?php
 	}?>
+	<?php //check whether to display the Change Team Name button, which works off of $_SESSION['teamid']
+	if (!isset($_SESSION['teamid'])){
+		
+	} else if ($username == $_SESSION['username'] && $_SESSION['teamid'] == $teamid){ ?>
+	<nav>
+		<ul class="nav3">
+			<li><a href="change_teamname.php">Change Team Name</a></li>
+		</ul>
+	</nav>
+	<?php } ?>
 </body>
 </html>
 

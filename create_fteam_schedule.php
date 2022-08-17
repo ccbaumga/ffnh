@@ -39,7 +39,7 @@ function lock_teams($leagueid){
 	$lastweek = substr($row['regularweeks'], strpos($row['regularweeks'], ",") + 1);
 	$firstweek = substr($row['regularweeks'], 0, strpos($row['regularweeks'], ","));
 	echo "<br>" . $lastweek . "<br>" . $firstweek . "<br>" . intval("a") . "<br>";
-	if (intval($lastweek) > 0 && intval($firstweek)){
+	if (intval($lastweek) > 0 && intval($firstweek) > 0){
 		$lastweek = intval($lastweek);
 		$firstweek = intval($firstweek);
 	} else {
@@ -259,5 +259,51 @@ function flip_home_away($sa){
 		}
 	}
 	return $sa;
+}
+
+function unlock_teams($leagueid){
+	$pdo = db_connect();
+	
+	$statement = $pdo->prepare('select currentweek from globals');
+	$statement->execute([]);
+	$row = $statement->fetch();
+	$currentweek = $row['currentweek'];
+	
+	$statement = $pdo->prepare('select count(*) as numteams from fantasyteams
+	where league = ?');
+	$statement->execute([$leagueid]);
+	$row = $statement->fetch();
+	$numteams = $row['numteams'];
+	
+	$statement = $pdo->prepare('select leaguename, admin, teamslocked, drafttime
+	from leagues where leagueid = ?');
+	$statement->execute([$leagueid]);
+	$row = $statement->fetch();
+	
+	if ($row['admin'] <> $_SESSION['username']){
+		return "You (" . $_SESSION['username'] . ") are not the admin (" . $row['admin'] . ") of this league (" . $leagueid . "," . $row['leaguename'] . ").";
+	}
+	if ($row['teamslocked'] <> 1){
+		return "Teams in this league (" .  $leagueid . "," . $row['leaguename'] . ") are already unlocked.";
+	}
+	
+	$statement = $pdo->prepare('select teamid from fantasyteams
+	where league = ?');
+	$statement->execute([$leagueid]);
+	$teamidarray = [-1]; // filler because there is no team 0 in schedulearray
+	for ($x = 0; $x < $numteams; $x++){
+		$row = $statement->fetch();
+		array_push($teamidarray, $row['teamid']);
+	}
+	//insert all the games
+	for ($x = 1; $x < count($teamidarray); $x++){
+		$statement = $pdo->prepare('delete from fantasymatchups where hometeam = ? or awayteam = ?');
+		$statement->execute([$teamidarray[$x], $teamidarray[$x]]);
+	}
+	//change the leagues teamslocked values
+	$statement = $pdo->prepare('update leagues set teamslocked = 0 where leagueid = ?');
+	$statement->execute([$leagueid]);
+	return false;
+	return "no code";
 }
 ?>

@@ -36,7 +36,7 @@
 	?>
 	<nav>
 		<ul class="button editprofile">
-			<li><a href="profile_settings.html">Edit Profile: <?php echo $username?></a></li>
+			<li><a href="profile_settings.php">Edit Profile: <?php echo $username?></a></li>
 		</ul>
 	</nav>
 	<section class="myteamslist">
