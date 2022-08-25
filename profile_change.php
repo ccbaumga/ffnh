@@ -5,6 +5,10 @@ function change_profile($username){
 	if ($username == ""){
 		return [true, "New Username cannot be blank/whitespace<br>"];
 	}
+	include("globalconstants.php");
+	if (strlen($username) > $maxUsername){
+		return [true, "New Username is too long<br>"];
+	}
 	if ($username == $_SESSION['username']){
 		return [false, ""];
 	}

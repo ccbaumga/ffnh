@@ -85,7 +85,7 @@
 					<th>Change</th>
 				<tr>
 					<td>League Name:</td>
-					<td><input type="text" name="leaguename" id="leaguename" value="<?php echo $_SESSION['leaguename'] ?>"></td>
+					<td><input type="text" name="leaguename" id="leaguename" value="<?php echo $_SESSION['leaguename'] ?>" maxlength="<?php echo $maxLeaguename;?>"></td>
 				</tr>
 				<tr>
 					<td>League ID:</td>

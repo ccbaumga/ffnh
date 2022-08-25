@@ -26,6 +26,10 @@ $db = db_connect();
 function register($username, $password) {
 	global $db;
 	$registered = FALSE;
+	include("globalconstants.php");
+	if (strlen($username) > $maxUsername){
+		return $registered;
+	}
 	try{
 		$statement = $db->prepare("INSERT INTO profiles 
 		(username, password) values (?, ?)");

@@ -15,7 +15,9 @@
 	include("header.html"); 
 	include("db.php");
 	$pdo = $db;
+	include("nav.html");
 	include("change_teamname_code.php");
+	include("globalconstants.php");
 	
 	if (!isset($_SESSION['teamid'])){
 		redirect("myteams.php");
@@ -37,7 +39,7 @@
 		<form id="settings" action="change_teamname.php" method="post">
 			<div>
 				<label for="teamname">Team Name:</label>
-				<input type="text" name="teamname" id="teamname" value="<?php echo $_SESSION['teamname'];?>" >
+				<input type="text" name="teamname" id="teamname" value="<?php echo $_SESSION['teamname'];?>" maxlength="<?php echo $maxTeamname;?>" >
 			</div>
 			<input type="submit" value="Change Team Name">
 		</form>

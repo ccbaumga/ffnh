@@ -1,4 +1,4 @@
-<?php
+<?php //this code is called by add_team.php (add from admin) and join_league.php (join from league search)
 function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 	
 	/*check for simple errors*/
@@ -10,6 +10,11 @@ function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 	$teamname = trim($teamname);
 	if (!$teamname) {
 		$teamname = $username;
+	}
+	
+	include("globalconstants.php");
+	if (strlen($teamname) > $maxTeamname){
+		return "Team name entered is more than " . $maxTeamname . " characters.<br>";
 	}
 	
 	/*check that username exists*/
@@ -56,7 +61,7 @@ function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 	(owner, league, teamname) values 
 	(?, ?, ?)');
 	$statement->execute([$username, $leagueid, $teamname]);
-	/*confirm league creation*/
+	/*confirm team creation*/
 	$statement = $pdo->prepare('select last_insert_id()');
 	$statement->execute([]);
 	$row = $statement->fetch();
@@ -75,6 +80,12 @@ function create_team($leagueid, $username, $teamname, $allowduplicates = true) {
 	if ($teamid == null) {
 		return "teamid is null";
 	}
+	
+	//insert into chats
+	$statement = $pdo->prepare('insert into chats
+	(user, message, leagueid) values 
+	(?, ?, ?)');
+	$statement->execute(["ADMIN", $teamname . " (" . $username . ") has joined the league", $leagueid]);
 	
 	return "";
 }

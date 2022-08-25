@@ -18,9 +18,17 @@ function change_teamname($teamname, $teamid){
 	if ($row['owner'] <> $_SESSION['username']){
 		return [true, "You (" . $_SESSION['username'] . ") are not the owner (" . $row['owner'] . ") of this team (" . $teamid . ", " . $row['teamname'] . ").<br>"];
 	}
+	include("globalconstants.php");
+	if (strlen($teamname) > $maxTeamname){
+		return [true, "Team name entered is more than " . $maxTeamname . " characters.<br>"];
+	}
 	$statement = $pdo->prepare('update fantasyteams set teamname = ? where teamid = ?');
 	$statement->execute([$teamname, $teamid]);
 	$_SESSION['teamname'] = $teamname;
+	
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed their teamname from (" . $row['teamname'] . ") to (" . $teamname . ")", $row['league']]);
+	
 	return [false, "Successfully changed teamname from (" . $row['teamname'] . ") to (" . $teamname . "). <br>"];
 	
 }

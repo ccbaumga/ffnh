@@ -32,3 +32,5 @@ INSERT INTO nflteams (abbr, location, mascot) VALUES ('SF', 'San Francisco', '49
 INSERT INTO nflteams (abbr, location, mascot) VALUES ('ARI', 'Arizona', 'Cardinals');
 
 INSERT INTO globals (currentweek, urlpath) VALUES (1, 'localhost/ffnh/');
+INSERT INTO profiles (username, password) VALUES ('ADMIN', 'ADMIN');
+INSERT INTO profiles (username, password) VALUES ('TRANSACTION', 'TRANSACTION');

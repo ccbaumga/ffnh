@@ -15,6 +15,7 @@
 	ensure_logged_in();
 	include("header.html");
 	include("league_creation.php");	
+	include("globalconstants.php");
 	$creationFailed = FALSE;
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
@@ -38,7 +39,8 @@
 		$private = false;
 		$teamname = "";
 		//$numinstances = "";
-	}?>
+	}
+	?>
 	<h1>Create a New League</h1>
 	<?php if ($creationFailed) {
 		?><p><?php echo $creationFailed; ?></p><?php
@@ -47,7 +49,7 @@
 		<form id="league" action="league_creation_form.php" method="post">
 			<div>
 				<label for="leaguename">League Name:</label>
-				<input type="text" name="leaguename" id="leaguename" value="<?php echo $leaguename ?>">
+				<input type="text" name="leaguename" id="leaguename" value="<?php echo $leaguename ?>" maxlength="<?php echo $maxLeaguename;?>">
 			</div>
 			<!--<div>
 				<label for="numteams">Number of Teams:</label>
@@ -63,7 +65,7 @@
 			</div>
 			<div>
 				<label for="teamname">Your Fantasy Team Name (optional):</label>
-				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>">
+				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>" maxlength="<?php echo $maxTeamname;?>">
 			</div>
 			<input type="submit" value="Create" >
 		</form>

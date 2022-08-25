@@ -17,6 +17,7 @@
 	include("db.php");
 	$pdo = $db;
 	include("profile_change.php");
+	include("globalconstants.php");
 	
 	
 	$editFailed = [FALSE, ""];
@@ -33,7 +34,7 @@
 		<form id="settings" action="profile_settings.php" method="post">
 			<div>
 				<label for="username">Username:</label>
-				<input type="text" name="username" id="username" value="<?php echo $_SESSION['username'];?>" >
+				<input type="text" name="username" id="username" value="<?php echo $_SESSION['username'];?>" maxlength="<?php echo $maxUsername;?>">
 			</div>
 			<input type="submit" value="Change Profile">
 		</form>

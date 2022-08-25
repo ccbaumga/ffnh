@@ -16,6 +16,7 @@
 	include("header.html");
 	include("nav.html");
 	include("team_creation.php");
+	include("globalconstants.php");
 	
 	$creationFailed = FALSE;
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,7 +47,7 @@
 			</div>
 			<div>
 				<label for="teamname">Fantasy Team Name (optional):</label>
-				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>">
+				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>" maxlength="<?php echo $maxTeamname;?>">
 			</div>
 			<input type="submit" value="Add" >
 		</form>

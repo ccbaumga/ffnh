@@ -75,6 +75,8 @@ function lock_teams($leagueid){
 	//change the leagues teamslocked values
 	$statement = $pdo->prepare('update leagues set teamslocked = 1 where leagueid = ?');
 	$statement->execute([$leagueid]);
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has locked teams and generated matchup schedule", $_SESSION['leagueid']]);
 	return false;
 	return "no code";
 }
@@ -303,6 +305,8 @@ function unlock_teams($leagueid){
 	//change the leagues teamslocked values
 	$statement = $pdo->prepare('update leagues set teamslocked = 0 where leagueid = ?');
 	$statement->execute([$leagueid]);
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has unlocked teams", $_SESSION['leagueid']]);
 	return false;
 	return "no code";
 }

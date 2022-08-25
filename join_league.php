@@ -15,6 +15,7 @@
 	ensure_logged_in();
 	include("header.html");
 	include("team_creation.php");
+	include("globalconstants.php");
 	
 	$creationFailed = FALSE;
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -49,7 +50,7 @@
 			<input type="hidden" id="addleague" name="addleague" value="<?php echo $addleague;?>">
 			<div>
 				<label for="teamname">Fantasy Team Name:</label>
-				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>">
+				<input type="text" name="teamname" id="teamname" value="<?php echo $teamname ?>" maxlength="<?php echo $maxTeamname;?>">
 			</div>
 			<input type="submit" value="Add" >
 		</form>

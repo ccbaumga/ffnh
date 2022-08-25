@@ -37,6 +37,9 @@ function change_team_owner($newusername, $league, $teamid){
 	where teamid = ?');
 	$statement->execute([$newusername, $teamid]);
 	
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed the owner of a team", $_SESSION['leagueid']]);
+	
 	return [false, "Owner of team (" . $teamid . ", " . $teamname . ") changed from (" . $oldowner . ") to (" . $newusername . ").<br>"];
 }
 ?>

@@ -21,12 +21,14 @@ function remove_team($removeteam){
 	if ($row == false){
 		return "No such team (" . $removeteam . "). <br>";
 	}
-	if ($row['league'] <> $removeteam){
+	if ($row['league'] <> $_SESSION['leagueid']){
 		return "This team (" . $removeteam . ") is not in this league (" . $_SESSION['leagueid'] . "). <br>";
 	}
 	$statement = $pdo->prepare('delete from fantasyteams
 	where teamid = ?');
 	$statement->execute([$removeteam]);
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has removed a team from league", $_SESSION['leagueid']]);
 	redirect("standings.php");
 	return false;
 }

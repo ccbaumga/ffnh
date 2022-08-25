@@ -1,7 +1,10 @@
-commit 7
+commit 8
 
-added unlock teams button. works.
-added remove team button. works
-added change username. works
-added change team owner. works.
-added change teamname. works
+make team name changes make a chat. works.
+make team name changes be only (40, global variable) characters. works.
+make all new fantasy teams create a chat. works
+make all new fantasy teams be less than 40 chars. works
+make all new profiles be <= 20 chars (register) and make all updated profiles be <= 20 chars (profile_settings, profile_change). works
+make all new leagues create a chat. works
+make all admin league settings updates create a chat (league_creation)
+make all new league names be <= 20 chars (leaguecreation, leaguecreationform) and all league name changes  stay <= 20 (edit_settings, league_creation)

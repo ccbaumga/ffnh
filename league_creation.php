@@ -47,10 +47,13 @@ function editsettings($newsettings, $pdo){
 	if ($_SESSION['username'] <> $row['admin']){
 		return [true, "You (" . $_SESSION['username'] . ") are not the admin (" . $row['admin'] . ") of this league (" . $_SESSION['leagueid'] . ")."];
 	}
-	if ($newsettings->leaguename <> $row['leaguename'] && trim($newsettings->leaguename) <> $row['leaguename']){
+	global $maxLeaguename;
+	if ($newsettings->leaguename <> $row['leaguename'] && trim($newsettings->leaguename) <> $row['leaguename'] && strlen(trim($newsettings->leaguename)) <= $maxLeaguename){
 		$statement = $pdo->prepare('update leagues set leaguename = ? where leagueid = ?');
 		$statement->execute([trim($newsettings->leaguename), $_SESSION['leagueid']]);
 		$editFailed = [false, "Successfully changed league name to: " . trim($newsettings->leaguename) . "<br>"];
+		$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+		$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed league name", $_SESSION['leagueid']]);
 	}
 	if ($newsettings->private) {
 		$privatetext = 'private';
@@ -61,6 +64,8 @@ function editsettings($newsettings, $pdo){
 		$statement = $pdo->prepare('update leagues set privacy = ? where leagueid = ?');
 		$statement->execute([$privatetext, $_SESSION['leagueid']]);
 		$editFailed[1] = $editFailed[1] . "Successfully changed privacy to: " . $privatetext . "<br>";
+		$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+		$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed league privacy settings", $_SESSION['leagueid']]);
 	}
 	$newsettings->numinstances = trim($newsettings->numinstances);
 	if ($newsettings->numinstances <> $maxinstances){
@@ -89,6 +94,8 @@ function editsettings($newsettings, $pdo){
 			}
 			
 			$editFailed[1] = $editFailed[1] . "Successfully changed number of instances to " . $newsettings->numinstances . ".<br>";
+			$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+			$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed league instance settings", $_SESSION['leagueid']]);
 		}
 	}
 	$newsettings->rostersize = trim($newsettings->rostersize);
@@ -108,6 +115,8 @@ function editsettings($newsettings, $pdo){
 				$statement->execute([$newsettings->rostersize, $newsettings->rostersize, $_SESSION['leagueid']]);
 				$editFailed[1] = $editFailed[1] . "Successfully changed rosterlimit, maxstart to: " . $newsettings->rostersize . ", " . $newsettings->rostersize . " <br>";
 			}
+			$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+			$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed league roster settings", $_SESSION['leagueid']]);
 		} else if ($newsettings->startingsize > $newsettings->rostersize){
 			$editFailed[1] = $editFailed[1] . "Starting Size cannot be greater than Roster Limit.<br>";
 			$editFailed[0] = true;
@@ -115,6 +124,8 @@ function editsettings($newsettings, $pdo){
 			$statement = $pdo->prepare('update leagues set rosterlimit = ?, maxstart = ? where leagueid = ?');
 			$statement->execute([$newsettings->rostersize, $newsettings->startingsize, $_SESSION['leagueid']]);
 			$editFailed[1] = $editFailed[1] . "Successfully changed rosterlimit, maxstart to: " . $newsettings->rostersize . ", " . $newsettings->startingsize . "<br>";
+			$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+			$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed league roster settings", $_SESSION['leagueid']]);
 		}
 	}
 	if ($newsettings->playoffteams <> $row['playoffteams'] || $newsettings->playoffweeks <> $row['playoffweeks']){
@@ -125,6 +136,8 @@ function editsettings($newsettings, $pdo){
 		$statement = $pdo->prepare('update leagues set standingstiebreaker = ?, weeklytiebreaker = ? where leagueid = ?');
 		$statement->execute([$newsettings->standingstiebreaker, $newsettings->weeklytiebreaker, $_SESSION['leagueid']]);
 		$editFailed[1] = $editFailed[1] . "Successfully changed tiebreakers to: " . $newsettings->standingstiebreaker . ", " . $newsettings->weeklytiebreaker . "<br>";
+		$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+		$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has changed tiebreaker settings", $_SESSION['leagueid']]);
 	}
 	
 	return $editFailed;
@@ -132,6 +145,8 @@ function editsettings($newsettings, $pdo){
 function create_league($leaguename, $private, $teamname) {
 	$error = "";
 	global $standardNumInstances;
+	global $maxLeaguename;
+	global $maxTeamname;
 	$numinstances = $standardNumInstances;
 	
 	/*check for simple errors*/
@@ -147,6 +162,12 @@ function create_league($leaguename, $private, $teamname) {
 	}
 	
 	$teamname = trim($teamname);
+	if (strlen($leaguename) > $maxLeaguename){
+		return "League name entered is more than " . $maxLeaguename . " characters.<br>";
+	}
+	if (strlen($teamname) > $maxTeamname){
+		return "Team name entered is more than " . $maxTeamname . " characters.<br>";
+	}
 	
 	if ($error) {
 		return $error;
@@ -198,8 +219,15 @@ function create_league($leaguename, $private, $teamname) {
 		return "Instance counter doesn't match";
 	}
 	
+	//create new chat
+	$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+	$statement->execute(["ADMIN", "(" . $_SESSION['username'] . ") has created the league", $leagueid]);
+	
 	/*put user in the league*/
 	if ($teamname) {
+		if (strlen($teamname) > $maxTeamname){
+			return "League created. Team name entered is more than " . $maxTeamname . " characters. Failed to create team. <br>";
+		}
 		$statement = $pdo->prepare('insert into fantasyteams
 		(owner, league, teamname) values 
 		(?, ?, ?)');
@@ -222,6 +250,11 @@ function create_league($leaguename, $private, $teamname) {
 		$teamid = $row[0];
 		$_SESSION['teamid'] = $teamid;
 		$_SESSION['teamname'] = $teamname;
+		
+		//insert chat
+		$statement = $pdo->prepare('insert into chats (user, message, leagueid) VALUES (?, ?, ?)');
+		$statement->execute(["ADMIN", $teamname . " (" . $_SESSION['username'] . ") has joined the league", $leagueid]);
+		$_SESSION['leagueadmin'] = true;
 		redirect("team.php");
 	}
 	

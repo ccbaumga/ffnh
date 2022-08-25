@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$registerFailed = TRUE;
 	}
-} ?>
+} 
+include("globalconstants.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<form id="register" class="login" action="register.php" method="post">
 			<div>
 				<label for="username">Username:</label>
-				<input type="text" name="username" id="username" value="" >
+				<input type="text" name="username" id="username" value="" maxlength="<?php echo $maxUsername;?>" >
 			</div>
 			<div>
 				<label for="password">Password:</label>
