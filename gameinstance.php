@@ -104,16 +104,26 @@ class gameinstance {
 		}
 		return $class;
 	}
+	
+	
 } 
+
+function checknull($value){
+	if (is_null($value)){
+		return "NULL";
+	} else {
+		return $value;
+	}
+}
 
 function gameCreate($game, $sqlarray, $pdo, $week) {
 		$game->week = $week;
-		$game->myabbr = $sqlarray['nflteam'];
-		$game->mylocation = $sqlarray['location'];
-		$game->myinstancenumber = $sqlarray['instancenumber'];
-		$game->mywins = $sqlarray['wins'];
-		$game->mylosses = $sqlarray['losses'];
-		$game->myties = $sqlarray['ties'];
+		$game->myabbr = checknull($sqlarray['nflteam']);
+		$game->mylocation = checknull($sqlarray['location']);
+		$game->myinstancenumber = checknull($sqlarray['instancenumber']);
+		$game->mywins = checknull($sqlarray['wins']);
+		$game->mylosses = checknull($sqlarray['losses']);
+		$game->myties = checknull($sqlarray['ties']);
 		$currstatement = $pdo->prepare('SELECT hometeam, awayteam, status, day, 
 				kickofftime, homescore, awayscore, quarter, clock 
 				from nflgames
@@ -138,28 +148,28 @@ function gameCreate($game, $sqlarray, $pdo, $week) {
 		    $game->isaway = $currgame['awayteam'] == $game->myabbr;
 			if ($game->ishome){
 				$game->oppabbr = $currgame['awayteam'];
-				$game->myscore = $currgame['homescore'];
-				$game->oppscore = $currgame['awayscore'];
+				$game->myscore = checknull($currgame['homescore']);
+				$game->oppscore = checknull($currgame['awayscore']);
 			} else {
 				$game->oppabbr = $currgame['hometeam'];
-				$game->myscore = $currgame['awayscore'];
-				$game->oppscore = $currgame['homescore'];
+				$game->myscore = checknull($currgame['awayscore']);
+				$game->oppscore = checknull($currgame['homescore']);
 			}
-			$game->status = $currgame['status'];
-			$game->day = $currgame['day'];
-			$game->kickofftime = $currgame['kickofftime'];
-			$game->quarter = $currgame['quarter'];
-			$game->clock = $currgame['clock'];
+			$game->status = checknull($currgame['status']);
+			$game->day = checknull($currgame['day']);
+			$game->kickofftime = checknull($currgame['kickofftime']);
+			$game->quarter = checknull($currgame['quarter']);
+			$game->clock = checknull($currgame['clock']);
 			
 			$currstatement = $pdo->prepare('select wins, losses, ties, location
 			from nflteams
 			where abbr = ?');
 			$currstatement->execute([$game->oppabbr]);
 			$oppinfo = $currstatement->fetch();
-			$game->opplocation = $oppinfo['location'];
-			$game->oppwins = $oppinfo['wins'];
-			$game->opplosses = $oppinfo['losses'];
-			$game->oppties = $oppinfo['ties'];
+			$game->opplocation = checknull($oppinfo['location']);
+			$game->oppwins = checknull($oppinfo['wins']);
+			$game->opplosses = checknull($oppinfo['losses']);
+			$game->oppties = checknull($oppinfo['ties']);
 		}
 }
 

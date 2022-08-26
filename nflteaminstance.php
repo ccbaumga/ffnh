@@ -94,11 +94,11 @@
 			$games[$i] = new gameinstance;
 			$games[$i]->week = $i;
 			$games[$i]->myabbr = $nflteam;
-			$games[$i]->status = $weekswithgame[$i]['status'];
-			$games[$i]->day = $weekswithgame[$i]['day'];
-			$games[$i]->kickofftime = $weekswithgame[$i]['kickofftime'];
-			$games[$i]->quarter = $weekswithgame[$i]['quarter'];
-			$games[$i]->clock = $weekswithgame[$i]['clock'];
+			$games[$i]->status = checknull($weekswithgame[$i]['status']);
+			$games[$i]->day = checknull($weekswithgame[$i]['day']);
+			$games[$i]->kickofftime = checknull($weekswithgame[$i]['kickofftime']);
+			$games[$i]->quarter = checknull($weekswithgame[$i]['quarter']);
+			$games[$i]->clock = checknull($weekswithgame[$i]['clock']);
 			$games[$i]->ishome = $weekswithgame[$i]['homeabbr'] == $nflteam;
 			if ($games[$i]->ishome){
 				$games[$i]->mylocation = $weekswithgame[$i]['hometeamName'];
