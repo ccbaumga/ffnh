@@ -57,6 +57,11 @@
 		//others
 	}
 	$currentweek = 1;
+	$statement = $pdo->prepare('SELECT currentweek, urlpath
+	from globals');
+	$statement->execute([]);
+	$row = $statement->fetch();
+	$currentweek = $row['currentweek'];
 	$week = $currentweek;
 	$draftcomplete = true;
 	if ($currentweek == 0){

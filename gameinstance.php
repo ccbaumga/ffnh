@@ -185,7 +185,7 @@ function htmlOfSingleGame($game, $where, $leagueid) {
 					<img src="ffnh.png" alt="Team Image" style="width:42px;height:42px;">
 				</div>
 				<div class="nflteaminfo">
-					<p class="nflteamname"> <?php echo $game->myinstancenumber ?> <?php echo $game->mylocation ?> </p>
+					<p class="nflteamname"><?php echo $game->myinstancenumber; ?> <?php echo $game->mylocation; ?> </p>
 					<p class="nflrecord"><?php echo $game->stringMyRecord() ?></p>
 				</div>
 				<div class="nflgameinfo">
@@ -209,7 +209,7 @@ function htmlOfSingleGame($game, $where, $leagueid) {
 					<img src="ffnh.png" alt="Team Image" style="width:42px;height:42px;">
 				</div>
 				<div class="nflteaminfo">
-					<p class="nflteamname"> <?php echo $game->mylocation ?> </p>
+					<p class="nflteamname"><?php echo $game->myinstancenumber; ?> <?php echo $game->mylocation ?> </p>
 					<p class="nflrecord"><?php echo $game->stringMyRecord() ?></p>
 				</div>
 				<div class="nflgameinfo">

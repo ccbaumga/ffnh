@@ -1,5 +1,8 @@
-commit 9
+commit 10
 
-make the python dbconnect
-make the python schedule generator/scraper
-adjust gameinstance and nflteaminstance to not crash if there is null game data
+get score scraper from espn json working. works
+get EndOfGame stored procedure working. works
+//create EndOfWeek stored procedure. currently does nothing, will update in a future commit
+created updatedb.py file that calls updatescores.py, checks for end of games, checks for end of weeks, and calls stored procedure. works. 
+
+//call updatedb.py either scheduled or on refresh. currently, I run update.py from command line
