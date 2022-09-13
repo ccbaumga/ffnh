@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS globals;
 
 CREATE TABLE globals(
   currentweek INTEGER, 
-  urlpath VARCHAR(100)
+  urlpath VARCHAR(100),
+  lastscoreupdate DATETIME
 );
 
 CREATE TABLE nflteams (
@@ -119,6 +120,7 @@ CREATE TABLE history (
 	instancenumber INTEGER,
 	week INTEGER, 
 	owner INTEGER, 
+	status ENUM ('starting', 'bench') DEFAULT NULL,
 	PRIMARY KEY (nflteam, league, instancenumber, week),
 	FOREIGN KEY (nflteam) REFERENCES nflteams(abbr) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (league) REFERENCES leagues(leagueid) ON DELETE CASCADE,

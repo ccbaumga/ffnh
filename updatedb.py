@@ -40,7 +40,7 @@ print(newfinals)
 
 # call stored procedure on each game to update record
 for game in newfinals:
-    cursor.execute("CALL EndOfGame(" + str(dbweek) + ", " + game + ")")
+    cursor.execute("CALL EndOfGame(" + str(dbweek) + ", '" + game + "')")
 
 # check how many games this week
 cursor.execute("select count(*) from nflgames where week = " + str(dbweek))

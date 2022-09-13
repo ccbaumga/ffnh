@@ -1,8 +1,11 @@
-commit 10
+commit 11
 
-get score scraper from espn json working. works
-get EndOfGame stored procedure working. works
-//create EndOfWeek stored procedure. currently does nothing, will update in a future commit
-created updatedb.py file that calls updatescores.py, checks for end of games, checks for end of weeks, and calls stored procedure. works. 
+created PointsThisWeek sql function. Params: week, nflteam abbr, instancenumber. Returns: a decimal of instancenumber if this team won, half if tied, 0 if lost or bye. works
+created PointsSeason. works
+created TeamPointsThisWeek. works.
+created EndOfWeek. works
+created initial_setup.py which wipes and then creates everything in the database. works. 
+
 
 //call updatedb.py either scheduled or on refresh. currently, I run update.py from command line
+
