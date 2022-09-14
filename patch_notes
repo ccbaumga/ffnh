@@ -1,11 +1,10 @@
-commit 11
+commit 12
 
-created PointsThisWeek sql function. Params: week, nflteam abbr, instancenumber. Returns: a decimal of instancenumber if this team won, half if tied, 0 if lost or bye. works
-created PointsSeason. works
-created TeamPointsThisWeek. works.
-created EndOfWeek. works
-created initial_setup.py which wipes and then creates everything in the database. works. 
+got the concurrency thing working. 
+created StartUpdate.sql stored procedure to check if timeframe has passed since last update and whether someone is currently updating db (flag)
+	if (yes, no), flags and returns true, else returns false
+	Concurrency - I did research. Because the procedure uses update in 1 line, only one call will return true.
+		because it flags in the same line where it checks. atomic
+updatedb.py now calls this procedure to see if it needs to execute itself. calling gameover works. calling weekover works
 
-
-//call updatedb.py either scheduled or on refresh. currently, I run update.py from command line
 

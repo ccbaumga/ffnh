@@ -12,7 +12,9 @@ DROP TABLE IF EXISTS globals;
 CREATE TABLE globals(
   currentweek INTEGER, 
   urlpath VARCHAR(100),
-  lastscoreupdate DATETIME
+  lastscoreupdate DATETIME,
+  updateinprocess BOOLEAN DEFAULT FALSE, 
+  updatetimedelta TIME DEFAULT '00:01:00'
 );
 
 CREATE TABLE nflteams (

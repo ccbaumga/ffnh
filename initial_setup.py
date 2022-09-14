@@ -2,7 +2,7 @@ import dbconnect
 import string
 
 reg_sql_codes = ('tableCreation.sql', 'createTeams.sql')
-routines = ('gameover.sql', 'instancepointsthisweek.sql', 'instancepointsseason.sql', 'teampointsthisweek.sql', 'weekover.sql')
+routines = ('gameover.sql', 'instancepointsthisweek.sql', 'instancepointsseason.sql', 'teampointsthisweek.sql', 'weekover.sql', 'startUpdate.sql')
 
 def parse_sql_delim(text):
     dropline = ''
